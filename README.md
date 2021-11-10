@@ -1,2 +1,2 @@
-# springboot-monolith
-Monolith and Microservices projects demo
+# microservices-eureka-discovery
+Microservices with Eureka Server/Client configuration and Discovery demo
