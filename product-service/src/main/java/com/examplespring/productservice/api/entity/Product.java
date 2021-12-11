@@ -12,14 +12,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor	
 @Entity
-@Table(name = "product_detail")
+@Table(name = "`product_detail`")
 public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	private String item;
+	private String itemName;
 	private int totCount;
-	private double price;
+	private double itemRate;
 	private Boolean isActive;
 }

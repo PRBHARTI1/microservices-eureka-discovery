@@ -4,14 +4,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDTO {
 
 	private Integer id;
-	private String item;
+
+	@NotEmpty
+	private String itemName;
+
 	private int totCount;
-	private double price;
+
+	private double itemRate;
+
 	private Boolean isActive;
 }

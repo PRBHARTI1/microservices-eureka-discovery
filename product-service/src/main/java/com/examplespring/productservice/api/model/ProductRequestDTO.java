@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductRequestDTO {
 
-	private String item;
+	private String itemName;
 	private int totCount;
-	private double price;
+	private double itemRate;
 	private Boolean isActive;
 }

@@ -2,6 +2,9 @@ package com.examplespring.orderservice.api.controller;
 
 import java.util.List;
 
+import com.examplespring.orderservice.api.OrderServiceApplication;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,6 +34,9 @@ public class OrderController {
 	private OrderService orderService;
 
 
+	private static final Logger logger = LoggerFactory.getLogger(OrderServiceApplication.class);
+
+
 	/**
 	 * Order API calls
 	 * ---------------
@@ -41,6 +47,7 @@ public class OrderController {
 	public ResponseEntity<String> createOrder(@RequestBody OrderRequestDTO requestDTO) {
 		String response = orderService.createOrder(requestDTO);
 		if(response != null) {
+			logger.info("{}", "create msg => " + response);
 			return new ResponseEntity<String>(response, HttpStatus.CREATED);
 		} else {
 			return new ResponseEntity<String>(response, HttpStatus.BAD_REQUEST);
@@ -60,6 +67,7 @@ public class OrderController {
 	public ResponseEntity<OrderDTO> searchOrder(@PathVariable("id") int id) {
 		OrderDTO orderDTO = orderService.searchOrder(id);			
 		if(orderDTO != null) {
+			logger.info("{}", "search msg => " + orderDTO.getItemName());
 			return new ResponseEntity<OrderDTO>(orderDTO, HttpStatus.FOUND);
 		} else {
 			return new ResponseEntity<OrderDTO>(orderDTO, HttpStatus.BAD_REQUEST);
@@ -72,6 +80,7 @@ public class OrderController {
 	public ResponseEntity<String> deleteOrder(@PathVariable int id) {
 		String response = orderService.deleteOrder(id);
 		if(response != null) {
+			logger.info("{}", "delete msg => " + response);
 			return new ResponseEntity<String>(response, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<String>(response, HttpStatus.BAD_REQUEST);
@@ -85,6 +94,7 @@ public class OrderController {
 	public ResponseEntity<String> editOrder(@PathVariable int id, @RequestBody OrderDTO orderDTO) {
 		String response = orderService.editOrder(id, orderDTO);
 		if(response != null) {
+			logger.info("{}", "edit msg => " + response);
 			return new ResponseEntity<String>(response, HttpStatus.OK);			
 		} else {
 			return new ResponseEntity<String>(response, HttpStatus.BAD_REQUEST);
@@ -103,10 +113,11 @@ public class OrderController {
 	public ResponseEntity<ProductDTO> getProduct(@PathVariable("id") int id) {		
 		ProductDTO productDTO = orderService.searchProduct(id);		
 		if(productDTO != null) {
+			logger.info("{}", "searchProduct msg => " + productDTO.getItemName());
 			return new ResponseEntity<ProductDTO>(productDTO, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<ProductDTO>(productDTO, HttpStatus.BAD_REQUEST);
-		}		
+		}
 	}
 	
 	
@@ -115,10 +126,11 @@ public class OrderController {
 	public ResponseEntity<ProductDTO> purchaseProduct(@PathVariable(value = "id") int id, @RequestParam("qty") int qty) {
 		ProductDTO productDTO = orderService.purchaseProduct(id, qty);
 		if(productDTO != null) {
+			logger.info("{}", "purchaseProduct msg => " + productDTO.getItemName());
 			return new ResponseEntity<ProductDTO>(productDTO, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<ProductDTO>(productDTO, HttpStatus.BAD_REQUEST);
-		}	
+		}
 	}
 	
 	
@@ -127,6 +139,7 @@ public class OrderController {
 	public ResponseEntity<ProductDTO> returnProduct(@PathVariable int id, @RequestParam int qty) {
 		ProductDTO productDTO = orderService.returnProduct(id, qty);		
 		if(productDTO!=null) {
+			logger.info("{}", "returnProduct msg => " + productDTO.getItemName());
 			return new ResponseEntity<ProductDTO>(productDTO, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<ProductDTO>(productDTO, HttpStatus.BAD_REQUEST);

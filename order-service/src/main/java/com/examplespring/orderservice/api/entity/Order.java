@@ -15,14 +15,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor	
 @Entity
-@Table(name = "order_detail")
+@Table(name = "`order_detail`")
 public class Order {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	private String name;
-	private int qty;
-	private double amount;
+	private String itemName;
+	private String description;
+	private int quantity;
+	private double totalPrice;
 	private LocalDate date;
+	private String email;
 }
